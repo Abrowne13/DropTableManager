@@ -10,7 +10,7 @@ import Foundation
 public class DropTableManager {
     private var persistanceManager: PersistanceManager
     
-    init() {
+    public init() {
         persistanceManager = PersistanceManager()
     }
     
@@ -74,7 +74,7 @@ public class DropTableManager {
     
     //!! Again consider getting slotMachine table by name
     //!! The function does not iterate through all drops
-    func expectedValue(playCost: Int) -> Double {
+    public func expectedValue(playCost: Int) -> Double {
         var ev = -1.0
         let dropItems = self.getDropItems()
         if let table = self.getDropTables().first {
