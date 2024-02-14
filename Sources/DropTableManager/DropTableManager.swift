@@ -71,25 +71,18 @@ public class DropTableManager {
     public func removeDropTable(id: Int) {
         persistanceManager.removeDropTable(id: id)
     }
-    
-    //!! Again consider getting slotMachine table by name
-    //!! The function does not iterate through all drops
-    public func expectedValue(playCost: Int) -> Double {
+
+    public func expectedValue(playCost: Int, table: DropTable) -> Double {
         var ev = -1.0
         let dropItems = self.getDropItems()
-        if let table = self.getDropTables().first {
-            for drop in table.drops {
-                for itemId in drop.itemIds {
-                    if let dropItem = dropItems.first(where:{$0.id == itemId}) {
-                        let amount = dropItem.quantity
-                        ev += Double(amount - playCost) * Double(drop.weight)/Double(table.totalWeight)
-                    }
+        for drop in table.drops {
+            for itemId in drop.itemIds {
+                if let dropItem = dropItems.first(where:{$0.id == itemId}) {
+                    let amount = dropItem.quantity
+                    ev += Double(amount - playCost) * Double(drop.weight)/Double(table.totalWeight)
                 }
             }
-            return ev
-        } else {
-            print("could not return table for expected value")
-            return 0
         }
+        return ev
     }
 }
