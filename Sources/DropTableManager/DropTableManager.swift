@@ -71,18 +71,4 @@ public class DropTableManager {
     public func removeDropTable(id: Int) {
         persistanceManager.removeDropTable(id: id)
     }
-
-    public func expectedValue(playCost: Int, table: DropTable) -> Double {
-        var ev = -1.0
-        let dropItems = self.getDropItems()
-        for drop in table.drops {
-            for itemId in drop.itemIds {
-                if let dropItem = dropItems.first(where:{$0.id == itemId}) {
-                    let amount = dropItem.quantity
-                    ev += Double(amount - playCost) * Double(drop.weight)/Double(table.totalWeight)
-                }
-            }
-        }
-        return ev
-    }
 }
