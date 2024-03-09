@@ -58,6 +58,10 @@ public class DropTableManager {
         persistanceManager.removeDrop(id: id)
     }
     
+    public func updateDrop(id: Int, name: String? = nil, itemIds: [Int]? = nil, weight: Int? = nil) {
+        persistanceManager.updateDrop(id: id, name: name, itemIds: itemIds,  weight: weight)
+    }
+    
     
     //MARK: Drop Tables
     public func addDropTable(name: String, dropIds: [Int]) {

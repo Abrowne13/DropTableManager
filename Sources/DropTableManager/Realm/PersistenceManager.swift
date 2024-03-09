@@ -154,6 +154,31 @@ class PersistanceManager {
         }
     }
     
+    func updateDrop(id: Int, name: String? = nil, itemIds: [Int]? = nil, weight: Int? = nil) {
+        do {
+            if let drop = realm.objects(DropTableDropObject.self).first(where: {
+                $0.id == id
+            }) {
+                try realm.write {
+                    if let name {
+                        drop.name = name
+                    }
+                    if let itemIds {
+                        let itemIdList = List<Int>()
+                        itemIdList.append(objectsIn: itemIds)
+                        drop.itemIds = itemIdList
+                    }
+                    if let weight {
+                        drop.weight = weight
+                    }
+                }
+                
+            }
+        } catch {
+            print("Unable to update drop")
+        }
+    }
+    
 
     //MARK: DropTables
     func addDropTable(name: String, dropIds: [Int]) {
