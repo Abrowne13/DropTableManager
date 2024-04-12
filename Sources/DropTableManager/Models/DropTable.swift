@@ -21,10 +21,9 @@ public struct DropTable {
             let roll = Int.random(in: 1...totalWeight)
             var total = 0
             for drop in drops {
-                if roll <= total + drop.weight {
+                total += drop.weight
+                if roll <= total {
                     return drop
-                } else {
-                    total += drop.weight
                 }
             }
         }
